@@ -1,6 +1,18 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-phpinfo();
+require 'TopicData.php';
 
-?>
+$data = new TopicData();
+$data->connect();
+
+$topics = $data->getAllTopics();
+
+foreach ($topics as $topic) {
+    echo "<h3>" .$topic['title']. " (ID: " .$topic['id']. ")</h3>";
+    echo "<p>";
+    echo nl2br($topic['description']);
+    echo "</p>";
+}
